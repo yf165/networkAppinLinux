@@ -20,9 +20,9 @@ int main(void)
 	}
 	printf("addr = 0x%x\n",addr.s_addr);
 #endif	
-	const char *inet_ntop(int af, const void *src,
-                             char *dst, socklen_t size);
-
+	char bufIP[100] ={0};
+	int nIP = 0x6701a8c0;
+	inet_ntop(AF_INET, &nIP,bufIP, sizeof(bufIP));
+	printf("bufIP:%s\n",bufIP);
 	return 0;
-
 }
