@@ -57,9 +57,6 @@ int main()
 	struct sockaddr_in serAddr ={0};
 	in_addr_t s_addr = 0;
 	socklen_t cliAddrLen = sizeof(struct sockaddr_in);
-
-
-
 	pthread_t subThread;
 	sockfd = socket(AF_INET,SOCK_STREAM,0);
 	if(sockfd < 0){
