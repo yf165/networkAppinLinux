@@ -2,9 +2,10 @@
 #include <sys/types.h>          /* See NOTES */
 #include <sys/socket.h>
 #include <arpa/inet.h>
+#include <string.h>
 
 #define SERPORT 6003
-#define SERIP "192.168.11.129"
+#define SERIP "151.146.92.154"
 #define MAXLENCON	100
 int main()
 {
@@ -34,6 +35,22 @@ int main()
 		perror("bind");
 		return -1;
 	}	
+	while(1){
+		ret = recv(sockfd,&dataBuf,sizeof(dataBuf),0);
+		printf("data from server :%s\n",dataBuf);
+		printf("continue receive\n");
+		scanf("%s",dataBuf);
+		ret = send(sockfd,&dataBuf,sizeof(dataBuf),0);		
+		if(ret < 0){
+			perror("send");
+			close(sockfd);
+			return -1;
+		}
+		if(strncmp(dataBuf,"end",3) == 0){
+			printf("client end\n");
+			break;
+		}
+	} 
 	close(sockfd);
 	return 0;
 }
